@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="header.html">
+    <meta charset="UTF-8">
+    <title>Zadanie3</title>
+</head>
+<body>
+<div class="row" style="margin: 15px">
+    <div class="row">
+        <a href="/users/" class="nav-link">< back to users</a>
+    </div>
+
+    <div class="row bg-light">
+        <h1 th:text="${user.firstname} + ' ' + ${user.lastname}"></h1>
+    </div>
+    <div class="row bg-light">
+        <div class="col-sm-2 text-center">
+            <a th:href="@{'/user/edit/' + ${user.id}}" class="page-link">edit this user</a>
+        </div>
+        <div class="col-2 text-center">
+            <a th:href="@{'/user/' + ${user.id} + '/agreement/add'}" class="page-link">add agreement to this user</a>
+        </div>
+
+        <ul style="margin: 15px">
+            <li>
+                <span><b>ID:</b></span>
+                <span th:text="${user.id}"></span>
+            </li>
+            <li>
+                <span><b>Birth number:</b></span>
+                <span th:text="${user.birthNumber}"></span>
+            </li>
+            <li>
+                <span><b>Email:</b></span>
+                <span th:text="${user.email}"></span>
+            </li>
+            <li>
+                <span><b>Permanent address</b></span>
+                <ul>
+                    <li>
+                        <span><b>Postal code:</b></span>
+                        <span th:text="${user.permanentAddress.postalCode}"></span>
+                    </li>
+                    <li>
+                        <span><b>City:</b></span>
+                        <span th:text="${user.permanentAddress.city}"></span>
+                    </li>
+                    <li>
+                        <span><b>Street:</b></span>
+                        <span th:text="${user.permanentAddress.street}"></span>
+                    </li>
+                    <li>
+                        <span><b>House number:</b></span>
+                        <span th:text="${user.permanentAddress.houseNumber}"></span>
+                    </li>
+                </ul>
+            </li>
+            <li th:if="${user.isCorrespondence}">
+                <span><b>Correspondence address</b></span>
+                <ul>
+                    <li>
+                        <span><b>Postal code:</b></span>
+                        <span th:text="${user.correspondenceAddress.postalCode}"></span>
+                    </li>
+                    <li>
+                        <span><b>City:</b></span>
+                        <span th:text="${user.correspondenceAddress.city}"></span>
+                    </li>
+                    <li>
+                        <span><b>Street:</b></span>
+                        <span th:text="${user.correspondenceAddress.street}"></span>
+                    </li>
+                    <li>
+                        <span><b>House number:</b></span>
+                        <span th:text="${user.correspondenceAddress.houseNumber}"></span>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+
+        <div>
+            <b><span>Concluded agreements</span>
+                <span th:text="'(' + ${userAgreements.size() + ')'}"></span></b>
+            <table class="table text-center">
+                <thead>
+                <tr class="">
+                    <th>type</th>
+                    <th>date of creation</th>
+                    <th>beginning date of insurance</th>
+                    <th>ending date of insurance</th>
+                    <th>monthly payment</th>
+                    <th>action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="agreement: ${userAgreements}" class="bg-white">
+                    <td th:text="${agreement.getClassName()}"></td>
+                    <td th:text="${agreement.dateOfCreation}"></td>
+                    <td th:text="${agreement.season.beginningDate}"></td>
+                    <td th:text="${agreement.season.endingDate}"></td>
+                    <td th:text="${agreement.monthlyPayment}"></td>
+                    <td>
+                        <a th:href="@{'/user/' + ${user.id} + '/agreement/' + ${agreement.id}}">show</a>
+                        <a th:href="@{'/user/' + ${user.id} + '/agreement/edit/' + ${agreement.getClassName()} + '-insurance/' + ${agreement.id}}">edit</a>
+                        <a th:href="@{'/user/' + ${user.id} + '/agreement/remove/' + ${agreement.id}}" class="link-danger" style="text-decoration: none; margin-left: 15px"><b>X</b></a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

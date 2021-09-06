@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="header.html">
+    <meta charset="UTF-8">
+    <title>Zadanie3</title>
+</head>
+<body>
+    <div class="row" style="margin-left: 10px">
+        <h2>USERS</h2>
+    </div>
+    <div class="row">
+        <table class="table bg-light text-center">
+            <thead>
+            <tr class="">
+                <th class="">ID</th>
+                <th>name</th>
+                <th>email</th>
+                <th>action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user: ${users.values()}">
+                <td th:text="${user.id}"></td>
+                <td th:text="${user.firstname} + ' ' + ${user.lastname}"></td>
+                <td th:text="${user.email}"></td>
+                <td>
+                    <a th:href="@{'/user/' + ${user.id}}" class="link-primary">show</a>
+                    <a th:href="@{'/user/edit/' + ${user.id}}" class="link-primary">edit</a>
+                    <a th:href="@{'/user/remove/' + ${user.id}}" class="link-danger" style="text-decoration: none; margin-left: 15px"><b>X</b></a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="row" style="margin-left: 10px">
+        <a href="/user/add" class="nav-link">add new user</a>
+    </div>
+</body>
+</html>

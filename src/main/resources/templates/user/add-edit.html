@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="header.html">
+    <meta charset="UTF-8">
+    <title>Zadanie3</title>
+</head>
+<body>
+    <div style="margin: 10px">
+        <div class="row">
+            <a href="/users/" class="nav-link">< back to users</a>
+        </div>
+
+        <div class="row text-center">
+            <h1 th:if="${id != 'none'}" th:text="'Edit user (' + ${id} + ')'"></h1>
+            <h1 th:if="${id == 'none'}" th:text="'Add new user'"></h1>
+        </div>
+        <div class="row">
+            <form th:action="@{'/user/' + ${action} + '/' + ${id}}" th:object="${userResource}" method="post">
+                <div class="row bg-light">
+                    <div class="col-4">
+                        <label><b>Details</b></label>
+                        <div>
+                            <label for="firstname">firstname</label><br>
+                            <input type="text" id="firstname" th:field="*{firstname}" />
+                            <small th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}" class="text-danger"></small>
+                        </div>
+                        <div>
+                            <label for="lastname">lastname</label><br>
+                            <input type="text" id="lastname" th:field="*{lastname}" />
+                            <small th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}" class="text-danger"></small>
+                        </div>
+                        <div>
+                            <label for="birthNumber">birth number</label><br>
+                            <input type="text" id="birthNumber" th:field="*{birthNumber}" />
+                            <small th:if="${#fields.hasErrors('birthNumber')}" th:errors="*{birthNumber}" class="text-danger"></small>
+                        </div>
+                        <div>
+                            <label for="email">email</label><br>
+                            <input type="text" id="email" th:field="*{email}" />
+                            <small th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger"></small>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="row">
+                            <label for="permanentAddress"><b>Permanent address</b></label>
+                            <div id="permanentAddress">
+                                <div>
+                                    <label for="perPostalCode">postal code</label><br>
+                                    <input type="text" id="perPostalCode" th:field="*{perPostalCode}" />
+                                    <small th:if="${#fields.hasErrors('perPostalCode')}" th:errors="*{perPostalCode}" class="text-danger"></small>
+                                </div>
+                                <div>
+                                    <label for="perCity">city</label><br>
+                                    <input type="text" id="perCity" th:field="*{perCity}" />
+                                    <small th:if="${#fields.hasErrors('perCity')}" th:errors="*{perCity}" class="text-danger"></small>
+                                </div>
+                                <div>
+                                    <label for="perStreet">street</label><br>
+                                    <input type="text" id="perStreet" th:field="*{perStreet}" />
+                                    <small th:if="${#fields.hasErrors('perStreet')}" th:errors="*{perStreet}" class="text-danger"></small>
+                                </div>
+                                <div>
+                                    <label for="perHouseNumber">house number</label><br>
+                                    <input type="text" id="perHouseNumber" th:field="*{perHouseNumber}" />
+                                    <small th:if="${#fields.hasErrors('perHouseNumber')}" th:errors="*{perHouseNumber}" class="text-danger"></small>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="isCorrespondence">Use correspondence address?</label>
+                            <input type="checkbox" id="isCorrespondence" th:field="*{correspondence}"/>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="row">
+                            <label for="correspondenceAddress"><b>Correspondence address</b></label>
+                            <div id="correspondenceAddress">
+                                <div>
+                                    <label for="corPostalCode">postal code</label><br>
+                                    <input type="text" id="corPostalCode" th:field="*{corPostalCode}" />
+                                    <small th:if="${#fields.hasErrors('corPostalCode')}" th:errors="*{corPostalCode}" class="text-danger"></small>
+                                </div>
+                                <div>
+                                    <label for="corCity">city</label><br>
+                                    <input type="text" id="corCity" th:field="*{corCity}" />
+                                    <small th:if="${#fields.hasErrors('corCity')}" th:errors="*{corCity}" class="text-danger"></small>
+                                </div>
+                                <div>
+                                    <label for="corStreet">street</label><br>
+                                    <input type="text" id="corStreet" th:field="*{corStreet}" />
+                                    <small th:if="${#fields.hasErrors('corStreet')}" th:errors="*{corStreet}" class="text-danger"></small>
+                                </div>
+                                <div>
+                                    <label for="corHouseNumber">house number</label><br>
+                                    <input type="text" id="corHouseNumber" th:field="*{corHouseNumber}" />
+                                    <small th:if="${#fields.hasErrors('corHouseNumber')}" th:errors="*{corHouseNumber}" class="text-danger"></small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin: 15px 0 0 10px">
+                    <input type="submit" value="Submit" class="btn btn-sm btn-primary" style="width: 8%"/>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

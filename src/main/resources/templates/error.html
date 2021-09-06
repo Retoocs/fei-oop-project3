@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="header.html">
+    <meta charset="UTF-8">
+    <title>Zadanie3</title>
+</head>
+<body>
+<div class="row" style="margin: 20px">
+    <div class="row">
+        <h1>Oops. Something went wrong! </h1>
+    </div>
+    <div class="row">
+        <small th:text="${message}" class="text-danger"></small>
+    </div>
+    <div class="row">
+        <a href="/" class="nav-link">Go home</a>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="header.html">
+    <meta charset="UTF-8">
+    <title>Zadanie3</title>
+</head>
+<body>
+
+<div class="row" style="margin: 15px">
+    <a href="/users/" class="nav-link">< back to users</a>
+</div>
+<div class="row bg-light" style="padding: 10px 0 10px 30px">
+    <div class="row">
+        <h1 th:text="${agreement.getClassName().toUpperCase()} + ' insurance'"></h1>
+    </div>
+    <div class="row text-center">
+        <div class="col-2">
+            <a th:href="@{'/user/' + ${agreement.getInsurerID()} + '/agreement/edit/' + ${agreement.getClassName()} + '-insurance/' + ${agreement.id}}" class="page-link">edit this agreement</a>
+        </div>
+    </div>
+    <div class="row">
+        <ul>
+            <li>
+                <span><b>ID:</b></span>
+                <span th:text="${agreement.id}"></span>
+            </li>
+            <li>
+                <span><b>Date of creation:</b></span>
+                <span th:text="${agreement.dateOfCreation}"></span>
+            </li>
+            <li>
+                <span><b>Insurer:</b></span>
+                <span th:text="${insurer.firstname}+ ' ' + ${insurer.lastname} + ' (' + ${insurer.id} + ')'"></span>
+            </li>
+            <li>
+                <span><b>Beginning date:</b></span>
+                <span th:text="${agreement.season.beginningDate}"></span>
+            </li>
+            <li>
+                <span><b>Ending date:</b></span>
+                <span th:text="${agreement.season.endingDate}"></span>
+            </li>
+            <li>
+                <span><b>Insurance indemnity:</b></span>
+                <span th:text="${agreement.insuranceIndemnity}"></span>
+            </li>
+            <li>
+                <span><b>Monthly payment:</b></span>
+                <span th:text="${agreement.monthlyPayment}"></span>
+            </li>
+            <li>
+                <span><b>Insured:</b></span>
+                <span th:text="${insured.firstname} + ' ' + ${insured.lastname} + ' (' + ${insured.id} + ')'"></span>
+            </li>
+            <li>
+                <span><b>Pernament consequences:</b></span>
+                <span th:text="${agreement.permanentConsequences}"></span>
+            </li>
+            <li>
+                <span><b>Death by injury:</b></span>
+                <span th:text="${agreement.deathByInjury}"></span>
+            </li>
+            <li>
+                <span><b>Daily compensation:</b></span>
+                <span th:text="${agreement.dailyCompensation}"></span>
+            </li>
+            <li>
+                <span><b>Territory:</b></span>
+                <span th:text="${agreement.territory}"></span>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+</body>
+</html>

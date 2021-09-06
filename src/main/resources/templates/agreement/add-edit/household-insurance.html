@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="header.html">
+    <meta charset="UTF-8">
+    <title>Zadanie3</title>
+</head>
+
+<body>
+<div class="row" style="margin: 15px">
+    <a href="/users/" class="nav-link">< back to users</a>
+</div>
+<div class="row" style="margin-left: 5px">
+    <h1 th:if="${agreementID != 'none'}" th:text="'Edit agreement (' + ${agreementID} + ')'"></h1>
+    <h1 th:if="${agreementID == 'none'}" th:text="'Add agreement'"></h1>
+</div>
+<div class="row" style="padding: 10px 0 10px 30px">
+    <form th:action="@{'/user/' + ${insurer.id} + '/agreement/' + ${action} + '/household-insurance/'+ ${agreementID}}" th:object="${householdResource}" method="post">
+        <div class="row bg-light">
+            <div>
+                <label for="insurerID">Insurer</label><br>
+                <select name="insurerID" id="insurerID">
+                    <option th:value="${insurer.id}"
+                            th:text="${insurer.firstname} + ' ' + ${insurer.lastname}"
+                            th:selected="${insurer.id}"></option>
+                </select>
+            </div>
+            <div>
+                <label for="beginningDate">Beginning date</label><br>
+                <input type="date" id="beginningDate" th:field="*{beginningDate}" />
+                <small th:if="${#fields.hasErrors('beginningDate')}" th:errors="*{beginningDate}" class="text-danger"></small>
+            </div>
+            <div>
+                <label for="endingDate">Ending date</label><br>
+                <input type="date" id="endingDate" th:field="*{endingDate}" />
+                <small th:if="${#fields.hasErrors('endingDate')}" th:errors="*{endingDate}" class="text-danger"></small>
+            </div>
+            <div>
+                <label for="insuranceIndemnity">Insurance indemnity</label><br>
+                <input type="text" id="insuranceIndemnity" th:field="*{insuranceIndemnity}" />
+                <small th:if="${#fields.hasErrors('insuranceIndemnity')}" th:errors="*{insuranceIndemnity}" class="text-danger"></small>
+            </div>
+            <div>
+                <label for="monthlyPayment">Monthly payment</label><br>
+                <input type="text" id="monthlyPayment" th:field="*{monthlyPayment}" />
+                <small th:if="${#fields.hasErrors('monthlyPayment')}" th:errors="*{monthlyPayment}" class="text-danger"></small>
+            </div>
+            <div>
+                <label for="typeOfProperty">Type of property</label><br>
+                <select name="typeOfProperty" id="typeOfProperty">
+                    <option th:each="typeOfProperty: ${typesOfProperty}"
+                            th:value="${typeOfProperty}"
+                            th:text="${typeOfProperty}"
+                            th:selected="${typeOfProperty.equals(householdResource.getTypeOfProperty())}"></option>
+                </select>
+            </div>
+            <div>
+                <label for="address"><b>Address</b></label>
+                <div id="address">
+                    <div>
+                        <label for="propertyPostalCode">Postal code</label><br>
+                        <input type="text" id="propertyPostalCode" th:field="*{propertyPostalCode}" />
+                        <small th:if="${#fields.hasErrors('propertyPostalCode')}" th:errors="*{propertyPostalCode}" class="text-danger"></small>
+                    </div>
+                    <div>
+                        <label for="propertyCity">City</label><br>
+                        <input type="text" id="propertyCity" th:field="*{propertyCity}" />
+                        <small th:if="${#fields.hasErrors('propertyCity')}" th:errors="*{propertyCity}" class="text-danger"></small>
+                    </div>
+                    <div>
+                        <label for="propertyStreet">Street</label><br>
+                        <input type="text" id="propertyStreet" th:field="*{propertyStreet}" />
+                        <small th:if="${#fields.hasErrors('propertyStreet')}" th:errors="*{propertyStreet}" class="text-danger"></small>
+                    </div>
+                    <div>
+                        <label for="propertyHouseNumber">House number</label><br>
+                        <input type="text" id="propertyHouseNumber" th:field="*{propertyHouseNumber}" />
+                        <small th:if="${#fields.hasErrors('propertyHouseNumber')}" th:errors="*{propertyHouseNumber}" class="text-danger"></small>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <label for="valueOfProperty">Value of property</label><br>
+                <input type="text" id="valueOfProperty" th:field="*{valueOfProperty}" />
+                <small th:if="${#fields.hasErrors('valueOfProperty')}" th:errors="*{valueOfProperty}" class="text-danger"></small>
+            </div>
+            <div>
+                <label for="equipmentValue">Equipment value</label><br>
+                <input type="text" id="equipmentValue" th:field="*{equipmentValue}" />
+                <small th:if="${#fields.hasErrors('equipmentValue')}" th:errors="*{equipmentValue}" class="text-danger"></small>
+            </div>
+        </div>
+        <div class="row" style="margin: 10px">
+            <input type="submit" value="Submit" class="btn btn-primary" style="width: 8%"/>
+        </div>
+    </form>
+</div>
+
+
+
+</body>
+</html>

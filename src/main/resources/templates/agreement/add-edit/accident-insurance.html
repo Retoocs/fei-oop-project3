@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="header.html">
+    <meta charset="UTF-8">
+    <title>Zadanie3</title>
+</head>
+<body>
+<div class="row" style="margin: 15px">
+    <a href="/users/" class="nav-link">< back to users</a>
+</div>
+<div class="row" style="margin-left: 5px">
+    <h1 th:if="${agreementID != 'none'}" th:text="'Edit agreement (' + ${agreementID} + ')'"></h1>
+    <h1 th:if="${agreementID == 'none'}" th:text="'Add agreement'"></h1>
+</div>
+<div class="row" style="padding: 10px 0 10px 30px">
+    <form th:action="@{'/user/' + ${insurer.id} + '/agreement/' + ${action} + '/accident-insurance/'+ ${agreementID}}" th:object="${accidentResource}" method="post">
+        <div class="row bg-light">
+            <div>
+                <label for="insurerID">Insurer</label><br>
+                <select name="insurerID" id="insurerID">
+                    <option th:value="${insurer.id}"
+                            th:text="${insurer.firstname} + ' ' + ${insurer.lastname}"
+                            th:selected="${insurer.id}"></option>
+                </select>
+            </div>
+            <div>
+                <label for="beginningDate">Beginning date</label><br>
+                <input type="date" id="beginningDate" th:field="*{beginningDate}" />
+                <small th:if="${#fields.hasErrors('beginningDate')}" th:errors="*{beginningDate}" class="text-danger"></small>
+            </div>
+            <div>
+                <label for="endingDate">Ending date</label><br>
+                <input type="date" id="endingDate" th:field="*{endingDate}" />
+                <small th:if="${#fields.hasErrors('endingDate')}" th:errors="*{endingDate}" class="text-danger"></small>
+            </div>
+            <div>
+                <label for="insuranceIndemnity">Insurance indemnity</label><br>
+                <input type="text" id="insuranceIndemnity" th:field="*{insuranceIndemnity}" />
+                <small th:if="${#fields.hasErrors('insuranceIndemnity')}" th:errors="*{insuranceIndemnity}" class="text-danger"></small>
+            </div>
+            <div>
+                <label for="monthlyPayment">Monthly payment</label><br>
+                <input type="text" id="monthlyPayment" th:field="*{monthlyPayment}" />
+                <small th:if="${#fields.hasErrors('monthlyPayment')}" th:errors="*{monthlyPayment}" class="text-danger"></small>
+            </div>
+            <div>
+                <label for="insuredID">Insured</label><br>
+                <select name="insuredID" id="insuredID">
+                    <option th:each="user: ${users}"
+                            th:value="${user.id}"
+                            th:text="${user.firstname} + ' ' + ${user.lastname}"
+                            th:selected="${accidentResource.getInsuredID()}"></option>
+                </select>
+            </div>
+            <div>
+                <label for="permanentConsequences">Pernament consequences</label><br>
+                <input type="text" id="permanentConsequences" th:field="*{permanentConsequences}" />
+                <small th:if="${#fields.hasErrors('permanentConsequences')}" th:errors="*{permanentConsequences}" class="text-danger"></small>
+            </div>
+            <div>
+                <label for="deathByInjury">Death by injury</label><br>
+                <input type="text" id="deathByInjury" th:field="*{deathByInjury}" />
+                <small th:if="${#fields.hasErrors('deathByInjury')}" th:errors="*{deathByInjury}" class="text-danger"></small>
+            </div>
+            <div>
+                <label for="dailyCompensation">Daily compensation</label><br>
+                <input type="text" id="dailyCompensation" th:field="*{dailyCompensation}" />
+                <small th:if="${#fields.hasErrors('dailyCompensation')}" th:errors="*{dailyCompensation}" class="text-danger"></small>
+            </div>
+            <div>
+                <label for="territory">Territory</label><br>
+                <select name="territory" id="territory">
+                    <option th:each="territory: ${territories}"
+                            th:value="${territory}"
+                            th:text="${territory}"
+                            th:selected="${territory.equals(accidentResource.getTerritory())}"></option>
+                </select>
+            </div>
+        </div>
+        <div class="row" style="margin: 10px">
+            <input type="submit" value="Submit" class="btn btn-primary" style="width: 8%"/>
+        </div>
+    </form>
+</div>
+
+
+</body>
+</html>
